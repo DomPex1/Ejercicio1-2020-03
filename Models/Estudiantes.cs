@@ -12,7 +12,7 @@ public class Estudiantes{
     public string Nombres{get; set;}
     public int Semestre{get; set;}
 
-            [ForeignKey("EstudianteId")]
+        [ForeignKey("EstudianteId")]
         public virtual List<EstudiantesDetalle> EstudiantesDetalle { get; set; } = new List<EstudiantesDetalle>();
 }
 

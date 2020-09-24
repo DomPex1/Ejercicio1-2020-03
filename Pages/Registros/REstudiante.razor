@@ -3,7 +3,7 @@
 
 @inject Blazored.Toast.Services.IToastService toast
 
-<EditForm Model="Estudiantes" OnValidSubmit="Guardar">
+<EditForm Model="estudiante" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
     <div class="card">
         <div class="card-header">
@@ -17,7 +17,7 @@
                         <div class="form-group">
                             <label>EstudianteId</label>
                             <div class="input-group">
-                                <InputNumber @bind-Value="Estudiantes.EstudianteId" class="form-control col-4" />
+                                <InputNumber @bind-Value="estudiante.EstudianteId" class="form-control col-4" />
                                 <div class="input-group-append">
                                     <button type="button" class="btn btn-primary input-group-text" @onclick="Buscar">Buscar</button>
                                 </div>
@@ -29,16 +29,16 @@
                 @*Nombres*@
                 <div class="form-group">
                     <label>Nombres</label>
-                    <InputText @bind-Value="Estudiantes.Nombres" class="form-control" />
-                    <ValidationMessage For="@(() => Estudiantes.Nombres)" />
+                    <InputText @bind-Value="estudiante.Nombres" class="form-control" />
+                    <ValidationMessage For="@(() => estudiante.Nombres)" />
                 </div>
 
                 @*Semestre*@
                 <div class="form-group">
                     <label>Semestre</label>
-                    <InputNumber @bind-Value="Estudiantes.Semestre"
+                    <InputNumber @bind-Value="estudiante.Semestre"
                                  class="form-control" />
-                    <ValidationMessage For="@(() => Estudiantes.Semestre)" />
+                    <ValidationMessage For="@(() => estudiante.Semestre)" />
                 </div>
                     </form>    
                 </div>
@@ -56,7 +56,7 @@
 @code {
     [Parameter]
     public int EstudianteId { get; set; }
-    private Estudiantes Estudiantes = new Estudiantes();
+    private Estudiantes estudiante = new Estudiantes();
     protected override void OnInitialized()
     {
         Nuevo();
@@ -66,17 +66,17 @@
 
     public void Nuevo()
     {
-        Estudiantes = new Estudiantes();
+        estudiante = new Estudiantes();
     }
 
     private void Buscar()
     {
-        if (Estudiantes.EstudianteId > 0)
+        if (estudiante.EstudianteId > 0)
         {
-            var encontrado = Ejercicio1_2020_03.BLL.EstudiantesBLL.Buscar(Estudiantes.EstudianteId);
+            var encontrado = Ejercicio1_2020_03.BLL.EstudiantesBLL.Buscar(estudiante.EstudianteId);
 
             if (encontrado != null)
-                this.Estudiantes = encontrado;
+                this.estudiante = encontrado;
             else
                 toast.ShowWarning("No encontrado");
         }
@@ -85,7 +85,7 @@
     public void Guardar()
     {
         bool guardo;
-        guardo = Ejercicio1_2020_03.BLL.EstudiantesBLL.Guardar(Estudiantes);
+        guardo = Ejercicio1_2020_03.BLL.EstudiantesBLL.Guardar(estudiante);
 
         if (guardo)
         {
@@ -100,7 +100,7 @@
     {
         bool elimino;
 
-        elimino = Ejercicio1_2020_03.BLL.EstudiantesBLL.Eliminar(Estudiantes.EstudianteId);
+        elimino = Ejercicio1_2020_03.BLL.EstudiantesBLL.Eliminar(estudiante.EstudianteId);
 
         if (elimino)
         {
